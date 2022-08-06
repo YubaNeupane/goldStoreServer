@@ -2,18 +2,22 @@ import express from "express";
 import bodyParser from "body-parser";
 import mongoose from "mongoose";
 import cors from "cors";
+import compression from "compression";
 
 import userRoutes from "./routes/user.js";
 import catRoutes from "./routes/category.js";
+import productRoutes from "./routes/product.js";
 
 const app = express();
 
+app.use(compression());
 app.use(bodyParser.json({ limit: "30mb", extended: true }));
 app.use(bodyParser.urlencoded({ limit: "30mb", extended: true }));
 app.use(cors());
 
 app.use("/user", userRoutes);
 app.use("/category", catRoutes);
+app.use("/product", productRoutes);
 
 const CONNECTION_URL =
   "mongodb+srv://yubaneupane:yubaneupane123@cluster0.it2kn.mongodb.net/myFirstDatabase?retryWrites=true&w=majority";
